@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="row-fluid">
-      <div class="span6">
+      <div class="span12">
         {{> list_members}}
       </div>
     </div>
@@ -29,6 +29,14 @@
     <div class="row-fluid">
       <div class="span12">
         <button class="btn btn-large btn-primary" id="add">Je l'ai fait</button>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span6">
+        {{> list_tasks}}
+      </div>
+      <div class="span6">
+        {{> add_members}}
       </div>
     </div>
   </div>
@@ -46,31 +54,13 @@
       <label class="control-label" for="member_sex">Sexe</label>
       <div class="controls">
         <label class="radio inline">
-          <input type="radio" name="sex" id="member_sex" value="m"/>
+          <input type="radio" name="sex" value="m" class="sex"/>
           Homme
         </label>
         <label class="radio inline">
-          <input type="radio" name="sex" id="member_sex" value="f"/>
+          <input type="radio" name="sex" value="f" class="sex"/>
           Femme
         </label>
-      </div>
-    </div>
-    <input type="submit" value="Ajouter" class="btn btn-primary"/>
-  </form>
-</template>
-
-<template name="add_categories">
-  <form class="well" id="form_categories" method="post">
-    <div class="control-group">
-      <label class="control-label" for="cat_name">Nom</label>
-      <div class="controls">
-        <input type="text" name="name" id="cat_name" />
-      </div>
-    </div>
-    <div class="control-group">
-      <label class="control-label" for="cat_place">Lieu</label>
-      <div class="controls">
-        <input type="text" name="place" id="cat_place" />
       </div>
     </div>
     <input type="submit" value="Ajouter" class="btn btn-primary"/>
@@ -81,16 +71,15 @@
   <h3>Quoi</h3>
   <div class="btn-group" data-toggle="buttons-radio">
     {{#each categories}}
-      <button class="btn" id="{{_id}}">{{name}}</button>
+      <button class="btn" id="{{this}}">{{this}}</button>
     {{/each}}
   </div>
 </template>
 
 <template name="list_tasks">
-
   <uL>
     {{#each tasks}}
-      <button class="btn" $(id="{{_id}}">{{name}}</button>
+      <li id="${{_id}}">{{member.name}} {{categorie}} {{time}}</li>
     {{/each}}
   </ul>
 </template>
@@ -99,7 +88,7 @@
   <h3>Qui</h3>
   <div class="btn-group" data-toggle="buttons-radio">
     {{#each members}}
-      <button class="btn" $(id="{{_id}}">{{name}}</button>
+      <button class="btn" id="{{_id}}">{{name}}</button>
     {{/each}}
   </div>
 </template>

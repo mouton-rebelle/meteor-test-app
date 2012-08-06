@@ -1,54 +1,55 @@
 // Client-side JavaScript, bundled and sent to client.
 
-// Define Minimongo collections to match server/publish.js.
-Categories = new Meteor.Collection("categories");
 Members = new Meteor.Collection("members");
 Tasks = new Meteor.Collection("tasks");
 
-Meteor.subscribe('categories', function () {
-});
-
 Meteor.subscribe('members', function () {
 });
-
-Meteor.subscribe('stats', function (data) {
-  console.log(data);
-  Meteor.ui.render(function () {
-    return Template.test({data: data});
-  })
+Meteor.subscribe('tasks', function () {
 });
+
 Template.list_categories.categories = function () {
-  return Categories.find({}, {sort: {name: 1}});
+  var data = [
+    'vaisselle',
+    'cuisine',
+    'linge',
+    'ménage',
+    'paperasse',
+    'courses',
+    'enfants',
+    'bricolage',
+    'jardinage',
+    'entretien'
+  ]
+  return data;
 };
 Template.list_members.members = function () {
   return Members.find({}, {sort: {name: 1}});
 };
-Template.add_categories.events = {
-  'submit #form_categories' : function(evt){
-    evt.preventDefault();
-    Categories.insert( {
-      name: $('#cat_name').val(),
-      place: $('#cat_place').val()
-    });
-    $('#form_categories').reset();
-  }
-};
+Template.list_tasks.tasks = function() {
+  return Tasks.find({});
+}
 
 Template.add_members.events = {
   'submit #form_members' : function(evt){
     evt.preventDefault();
     Members.insert( {
       name: $('#member_name').val(),
-      sex: $('#member_sex').val()
+      sex: $('.sex:checked').val()
     });
   }
 };
+
+
+
 $(document).ready(function(){
   $('body').on('click','#add',function(){
-    Tasks.insert({
-      catId:$('.btn-group').first().find('.active').attr('id'),
-      memberId:$('.btn-group').last().find('.active').attr('id'),
-      time:$('#time').val()
-    });
+    var now = new Date();
+    console.log(Tasks.insert({
+      categorie:$('.btn-group').first().find('.active').attr('id'),
+      member:Members.findOne($('.btn-group').last().find('.active').attr('id')),
+      time:$('#time').val(),
+      timestamp:now.getTime()
+    }));
   });
 })
