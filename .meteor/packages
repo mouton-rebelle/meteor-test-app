@@ -5,6 +5,7 @@
 
 bootstrap
 jquery
-accounts-ui
 accounts-passwords
 logging
+accounts-ui
+backbone

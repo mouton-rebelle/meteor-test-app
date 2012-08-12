@@ -1,55 +1,46 @@
-// Client-side JavaScript, bundled and sent to client.
-
-Members = new Meteor.Collection("members");
-Tasks = new Meteor.Collection("tasks");
-
-Meteor.subscribe('members', function () {
-});
-Meteor.subscribe('tasks', function () {
-});
-
-Template.list_categories.categories = function () {
-  var data = [
-    'vaisselle',
-    'cuisine',
-    'linge',
-    'ménage',
-    'paperasse',
-    'courses',
-    'enfants',
-    'bricolage',
-    'jardinage',
-    'entretien'
-  ]
-  return data;
-};
-Template.list_members.members = function () {
-  return Members.find({}, {sort: {name: 1}});
-};
-Template.list_tasks.tasks = function() {
-  return Tasks.find({});
-}
-
-Template.add_members.events = {
-  'submit #form_members' : function(evt){
-    evt.preventDefault();
-    Members.insert( {
-      name: $('#member_name').val(),
-      sex: $('.sex:checked').val()
-    });
-  }
-};
-
-
+Session.set('page_id',null);
+Session.set('editing_members',false);
 
 $(document).ready(function(){
-  $('body').on('click','#add',function(){
-    var now = new Date();
-    console.log(Tasks.insert({
-      categorie:$('.btn-group').first().find('.active').attr('id'),
-      member:Members.findOne($('.btn-group').last().find('.active').attr('id')),
-      time:$('#time').val(),
-      timestamp:now.getTime()
-    }));
+
+  $('body').on('click','#logout',function(){
+    Meteor.logout();
   });
-})
+
+});
+
+
+////////// Tracking selected list in URL //////////
+
+var BobonneRouter = Backbone.Router.extend({
+  routes: {
+    ":page_id": "main"
+  },
+  main: function (page_id) {
+    Session.set("page_id", page_id);
+    if (page_id == 'login') {
+      $('#login').modal('show');
+      $('#login').one('hide',function(){
+        Router.setPage(null);
+      });
+    } else if (page_id == 'register') {
+      $('#register').modal('show');
+      $('#register').one('hide',function(){
+        Router.setPage(null);
+      });
+    } else {
+      // $('#login').modal('close');
+      // $('#register').modal('close');
+    }
+  },
+  setPage: function (page_id) {
+    console.log('setPage ' + page_id);
+    this.navigate(page_id, true);
+  }
+});
+
+Router = new BobonneRouter();
+
+Meteor.startup(function () {
+  Backbone.history.start({pushState: true});
+});

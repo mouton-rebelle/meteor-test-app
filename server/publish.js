@@ -18,6 +18,6 @@ Meteor.publish('members', function () {
 Members.allow(defaultPermissions);
 
 Meteor.publish('tasks', function () {
-  return Tasks.find();
+  return Tasks.find( {userId:this.userId()} );
 });
 Tasks.allow(defaultPermissions);
