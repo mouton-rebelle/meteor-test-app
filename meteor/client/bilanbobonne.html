@@ -1,0 +1,43 @@
+<head>
+  <meta charset="utf-8">
+  <title>bilanbobonne</title>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span8">
+        {{> hero}}
+      </div>
+      <div class="span4">
+        {{#if currentUser}}
+          <p><a href="#" id="logout">se déconnecter</a></p>
+        {{/if}}
+        <h2>Expérience sociolo<span class="alt">geek</span></h2>
+        <p><a href="http://www.insee.fr/fr/themes/document.asp?ref_id=ip1377#inter3" target="_blank">L’INSEE est formel </a>: les femmes consacrent en moyenne <strong class="alt">1,6 fois plus de temps</strong> que les hommes aux tâches domestiques.</p>
+        <p>Intrigué et choqué par cet héritage préhistorique, et désireux de prouver au monde entier que les <strong class="alt">geeks</strong> ne sont définitivement pas des hommes comme les autres, j’ai lancé cette petite application pour calculer le bilan bobonne de votre couple.</p>
+        <p>Rejoignez-nous, c’est gratuit, simple et rigolo. Ou déprimant, quand vous verrez que vous passerez environ un an de votre vie à faire la vaisselle...</p>
+      </div>
+    </div>
+    {{#if currentUser}}
+    {{> list_members}}
+    {{> list_categories}}
+    <div class="row-fluid">
+      <div class="span6">
+        {{> list_tasks}}
+      </div>
+      <div class="span6">
+        {{> stats}}
+      </div>
+    </div>
+  </div>
+  {{/if}}
+  {{> login}}
+  {{> inscription}}
+</body>
+
+
+
+
+
+

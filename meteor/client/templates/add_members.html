@@ -1,0 +1,27 @@
+<template name="add_members">
+  <form id="form_members" class="well">
+    <div class="control-group">
+      <label class="control-label" for="member_name">Nom</label>
+      <div class="controls">
+        <input type="text" name="name" id="member_name" value="{{#if member}}{{member.name}}{{/if}}"/>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="member_sex">Sexe</label>
+      <div class="controls">
+        <label class="radio inline">
+          <input type="radio" name="sex" value="m" class="sex" {{#if member}}{{checked member.sex "m"}}{{/if}}/>
+          Homme
+        </label>
+        <label class="radio inline">
+          <input type="radio" name="sex" value="f" class="sex" {{#if member}}{{checked member.sex "f"}}{{/if}}/>
+          Femme
+        </label>
+      </div>
+    </div>
+    <input type="submit" value="{{#if member}}Modifier{{else}}Ajouter{{/if}}" class="btn btn-primary"/>
+    {{#if skip}}
+      <a class="btn btn-success pull-right" href="#">Ok, passer à la suite</a>
+    {{/if}}
+  </form>
+</template>

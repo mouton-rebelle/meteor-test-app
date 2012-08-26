@@ -1,0 +1,18 @@
+<template name="hero">
+
+  <div class="hero-unit">
+    <h1><span class="light">BILAN</span><br/><span class="hg">BOBONNE</span></h1>
+    {{#if currentUser}}
+    <p>
+      Salut {{currentUser.username}} ! Prêt à affonter le quotidien ?
+    </p>
+    {{else}}
+    <p>C'est moi qui fait <span class="hg">tout</span> dans cette <span class="hg">maison</span> !</p>
+    <div>
+      <button id="btn-register" class="btn btn-primary btn-large">S'inscrire</button>
+      <button id="btn-login" class="btn btn-large">Se connecter</button>
+    </div>
+    {{/if}}
+  </div>
+
+</template>

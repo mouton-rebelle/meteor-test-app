@@ -1,0 +1,39 @@
+@import 'compass';
+@import 'compass/css3';
+
+@import 'variables';
+
+@import 'compass_twitter_bootstrap';
+
+body{
+    background:$sombre url(/fond.jpg) repeat 0 0;
+    margin-top: 30px;
+}
+.container-fluid{
+    max-width: 960px;
+    margin:0 auto;
+}
+.light{
+    font-family: nexa_lightregular;
+}
+.hg{
+    color:$rouge;
+}
+.hero-unit{
+    h1{
+        line-height: 0.84;
+    }
+    p{
+        font-family: "nexa_lightregular","Helvetica Neue", Helvetica, Arial;
+        font-size: 20px;
+        border-top:1px solid $gris;
+        border-bottom:1px solid $gris;
+        padding:7px 0;
+        margin: 0 0 15px 0;
+    }
+}
+.alt{
+    color:$alt;
+}
+
+@import 'compass_twitter_bootstrap_responsive';
